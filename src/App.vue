@@ -1,7 +1,8 @@
 <template>
   <div class="todo-container">
     <div class="todo-wrap">
-      <TodoHeader :addTodo="addTodo" />
+      <!--绑定自定义事件-->
+      <TodoHeader @addTodo="addTodo" />
       <List :todos="todos" :deleteTodo="deleteTodo"/>
       <todo-footer :todos="todos" :clearCompletedTodos="clearCompletedTodos" :isCheckedAll="isCheckedAll"></todo-footer>
     </div>

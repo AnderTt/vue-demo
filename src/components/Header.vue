@@ -5,12 +5,6 @@
 </template>
 <script>
   export default {
-    props : {
-      addTodo: {
-        type : Function,
-        required : true
-      }
-    },
     data () {
       return {
         title : ''
@@ -30,7 +24,10 @@
           completed : false,
         }
         //4.添加到todos里面
-        this.addTodo(todo);
+        //this.addTodo(todo);
+        //4.分发/出发事件
+        this.$emit('addTodo',todo)
+
       }
     }
   }
