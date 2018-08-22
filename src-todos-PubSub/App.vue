@@ -13,8 +13,6 @@
   import List from './components/List.vue';
   import Footer from './components/Footer.vue';
   import PubSub from 'pubsub-js';
-  /*const TODOS_KEY = 'todos_key';*/
-  import storageUilt  from './uilts/storageUilt'
   export default {
     components : {
       TodoHeader : Header,
@@ -23,7 +21,11 @@
     },
     data(){
       return {
-        todos : []
+        todos : [
+          {title : '吃饭' , completed : false},
+          {title : '睡觉' , completed : false},
+          {title : '敲代码' , completed : true}
+        ]
       }
     },
     mounted(){
@@ -31,28 +33,8 @@
       PubSub.subscribe('deleteTodo',(msg,index) => {
         this.deleteTodo(index);
       });
-
-      //从localStorage中读取todos的值
-      setTimeout(()=>{
-        /*this.todos = JSON.parse(localStorage.getItem(TODOS_KEY) || '[]');*/
-        this.todos = storageUilt.getTodo();
-      },1000)
-
     },
-    watch : {
-      todos : {
-        deep : true, //深度监视
-        // 将todos最新值的json数据保存到localStorage,val为最新的todos
-        /*handler : function (val) {
-          localStorage.setItem(TODOS_KEY,JSON.stringify(val))
-        }*/
-        /*handler : function (val) {
-          storageUilt.saveTodo(val)
-        }*/
-        handler : storageUilt.saveTodo
 
-      }
-    },
     methods : {
       //添加todo
       addTodo(todo){
