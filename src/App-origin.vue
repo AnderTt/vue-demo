@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>clicked : {{count}} times,count is {{oddEven}}</h2>
-    &nbsp;&nbsp;<button @click="increment">+</button>
+    &nbsp;<button @click="increment">+</button>
     <button @click="decrement">-</button>
     <button @click="incrementIfOdd">incrementIfOdd</button>
     <button @click="incrementAsync">incrementAsync</button>
@@ -9,26 +9,32 @@
 </template>
 <script>
   export default {
+    data (){
+      return {
+        count : 0,
+      }
+    },
     computed : {
-      count(){
-        return this.$store.state.count
-      },
       oddEven(){
-        return this.$store.getters.oddEven;
+        return this.count%2===0 ? '偶数' : '奇数';
       }
     },
     methods : {
       increment(){
-        this.$store.dispatch('increment')
+        this.count++;
       },
       decrement(){
-        this.$store.dispatch('decrement')
+        this.count--;
       },
       incrementIfOdd(){
-        this.$store.dispatch('incrementIfOdd')
+        if(this.count%2===1){
+          this.count++;
+        }
       },
       incrementAsync(){
-        this.$store.dispatch('incrementAsync')
+        setTimeout(()=>{
+          this.count++;
+        },1000)
       }
     }
   }
